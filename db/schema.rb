@@ -17,15 +17,13 @@ ActiveRecord::Schema.define(version: 2021_08_17_183435) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end   
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.text "description"
     t.integer "rating"
-
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
