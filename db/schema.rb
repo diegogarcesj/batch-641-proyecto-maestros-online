@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_193956) do
+ActiveRecord::Schema.define(version: 2021_08_17_201606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 2021_08_17_193956) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_masters_on_category_id"
     t.index ["user_id"], name: "index_masters_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.text "description"
+    t.integer "status"
+    t.date "date"
+    t.bigint "user_id", null: false
+    t.bigint "master_id", null: false
+    t.bigint "review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["master_id"], name: "index_orders_on_master_id"
+    t.index ["review_id"], name: "index_orders_on_review_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -59,4 +73,7 @@ ActiveRecord::Schema.define(version: 2021_08_17_193956) do
 
   add_foreign_key "masters", "categories"
   add_foreign_key "masters", "users"
+  add_foreign_key "orders", "masters"
+  add_foreign_key "orders", "reviews"
+  add_foreign_key "orders", "users"
 end
