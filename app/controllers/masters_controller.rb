@@ -55,6 +55,6 @@ class MastersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def master_params
-      params.require(:master).permit(:description, :commercial_address, :category, :schedule, :price_per_hour)
+      params.require(:master).permit(:description, :commercial_address, :category, :schedule, :price_per_hour, photos: [] )
     end
 end
