@@ -1,0 +1,19 @@
+<h1>Esto es un new master</h1>
+
+
+<%= simple_form_for(@master) do |f| %>
+  <%= f.input :description %>
+
+  <%= f.input :commercial_address %>
+
+  <%= f.input :schedule %>
+
+  <%= f.input :price_per_hour %>
+
+  <%= f.association :category, collection: @categories %>
+
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+
+
+  <%= f.submit %>
+<% end %>

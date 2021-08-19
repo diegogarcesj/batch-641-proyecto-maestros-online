@@ -1,0 +1,33 @@
+<h1>Esto es un Show de master</h1>
+
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @master.user.first_name.upcase%> <%= @master.user.last_name.upcase %>
+</p>
+
+<%= cl_image_tag @master.user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%> <strong>description:</strong>
+  <%= @master.description %>
+
+
+  
+
+
+<p>
+  <strong>Address:</strong>
+  <%= @master.commercial_address %>
+</p>
+
+<p>
+  <strong>schedule:</strong>
+  <%= @master.schedule %>
+</p>
+
+<p>
+  <strong>category</strong>
+  <%= @master.category.name %>
+</p>
+
+<% @master.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
