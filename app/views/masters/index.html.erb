@@ -18,3 +18,16 @@
     <% end %>
   </div>
 </div>
+
+<h1>esto es un index de masters</h1>
+
+    <% @masters.each do |master| %>
+      
+        <%= master.description %>
+        <%= master.commercial_address %>
+
+
+        <%= link_to 'Show', master_path(master) %>
+        <%= link_to 'Edit', edit_master_path(master) %>
+      
+    <% end %>
