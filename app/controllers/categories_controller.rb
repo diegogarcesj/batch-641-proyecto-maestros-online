@@ -4,8 +4,8 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-  def show 
-  end 
+  def show
+  end
 
   def new
     @category = Category.new
@@ -14,12 +14,12 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to category_path(@category)
+      redirect_to categories_path
     else
       render 'new'
     end
   end
-  
+
   def edit
   end
 
