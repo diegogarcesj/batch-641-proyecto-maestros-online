@@ -13,6 +13,7 @@ class MastersController < ApplicationController
   # GET /masters/new
   def new
      @master = Master.new
+     @categories = Category.all
   end
 
   # GET /masters/1/edit
@@ -25,7 +26,7 @@ class MastersController < ApplicationController
      @master.user = current_user
 
     if @master.save
-      redirect_to @master, notice: 'Master was successfully created.'
+      redirect_to master_path(@master)
     else
       render :new
     end
@@ -34,7 +35,7 @@ class MastersController < ApplicationController
   # PATCH/PUT /masters/1
   def update
     if @master.update(master_params)
-      redirect_to @master, notice: 'Master was successfully updated.'
+      redirect_to @master
     else
       render :edit
     end
@@ -43,7 +44,7 @@ class MastersController < ApplicationController
   # DELETE /masters/1
   def destroy
     @master.destroy
-    redirect_to masters_url, notice: 'Masters was successfully destroyed.'
+    redirect_to masters_url
   end
 
 
@@ -55,6 +56,6 @@ class MastersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def master_params
-      params.require(:master).permit(:description, :commercial_address, :category, :schedule, :price_per_hour)
+      params.require(:master).permit(:description, :commercial_address, :category_id, :schedule, :price_per_hour, photos: [])
     end
 end

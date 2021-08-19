@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home' # Categories
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :categories, only: [:index, :new, :create, :show]
-  resources :masters, only: [:index, :show, :new, :create] do
+  resources :masters, only: [:index, :show, :new, :create, :edit, :update] do
     resources :orders, only: [:show, :new, :create] do
       resources :reviews, only: [:new, :create, :show]
     end
