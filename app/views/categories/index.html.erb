@@ -1,7 +1,19 @@
 <div class="home-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path 'banner.jpg' %>')">
 <h1>Maestros Online</h1>
 <h4>Contrata servicios para tu casa</h4>
-<p>buscador</p>
+<div class="d-flex justify-content-center">
+  <form class="form-inline" action="<%= masters_path %>">
+    <div class="form-group mr-1">
+      <input class="form-control" name="query" type="search" placeholder="Buscar" aria-label="Search">
+    </div>
+    <div class="form-group mx-1">
+      <input class="form-control" name="ubication" type="search" placeholder="Ubicaci&oacute;n" aria-label="Search">
+    </div>
+    <div class="form-group ml-1">
+      <button class="btn btn-warning" type="submit">Buscar</button>
+    </div>
+  </form>
+</div>
 </div>
 
 <div class="container mt-5 mb-5">
