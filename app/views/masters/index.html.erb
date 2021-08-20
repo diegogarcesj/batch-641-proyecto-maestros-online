@@ -1,18 +1,20 @@
+<h4 class="text-center p-3"><strong>Maestros Disponibles</strong></h4>
 <div class="container mb-5">
   <div class="row my-2">
-    <% @category.master.each do |master| %>
-      <div class="col-12 col-sm-6 mb-4" data-aos="zoom-in">
-        <div class="bg-white rounded shadow h-100">         
-          <div class="p-3 rounded-bottom d-flex flex-column">
-            <div>
+    <% @masters.each do |master| %>
+      <div class="col-3 " data-aos="zoom-in">
+        <div class="bg-white rounded-bottom shadow h-100">         
+          <div class="p-3 d-flex flex-column">
+            <div class="d-flex justify-content-around">
               <div>
-                  <h2><%= master.user.first_name %></h2>
-                  <p><%= master.description %></p>
+                  <strong><%= master.user.full_name %><span class="text-muted font-weight-normal">•</span></strong>
+                  <small><p><%= master.description%></p></small>
+                  <strong><i class="fas fa-star star-yellow"></i></strong>
               </div>
-             <%= cl_image_tag master.user.photo.key, height: 40, width: 40, crop: :fill %>
+             <%= cl_image_tag master.user.photo.key, height: 50, width: 50, crop: :fill, class: 'avatar-bordered' %>
             </div>
           </div>
-          <%= cl_image_tag master.photo.key, class: 'rounded-top' %>
+          <%= cl_image_tag master.photos[0].key, crop: :fill, class: 'rounded img-fluid img-responsive'%>
         </div>
       </div>
     <% end %>
