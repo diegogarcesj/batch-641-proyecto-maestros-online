@@ -13,27 +13,21 @@
   }
 }
 
-.descripcion{
-  
-position: absolute;
-width: 500px;
-height: 149px;
-left: 700px;
-top: 200px;
-background-color: beige;
 
+
+.abaout{
+  min-height: 200px;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-.boton-contratar{
-  position: absolute;
-  left: 850px;
-  top: 380px;
+.projects{
+  display:grid;
+  grid-template-columns: 1fr;
 }
 
-.mapa-dibujo{
-  position: absolute;
-  width: 600px;
-  height: 149px;
-  left: 1250px;
-  top: 150px;
+#imagencarrusel{
+  text-align: center;
+  max-width: 100%;
+  max-height: 100%;
 }
