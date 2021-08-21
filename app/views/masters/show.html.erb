@@ -8,12 +8,27 @@
   <%= @master.user.first_name.upcase%> <%= @master.user.last_name.upcase %>
 </p>
 
-<%= cl_image_tag @master.user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%> <strong>description:</strong>
+<%= cl_image_tag @master.user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%> 
+
+
+<div class="descripcion"><strong>description:</strong>
   <%= @master.description %>
+</div>
+<div class="boton-contratar">
+<button type="button" class="btn btn-warning">Contratar Maestro</button>
+</div>
 
-
-  
-
+<div class="mapa-dibujo">
+┼┼┼┼┼┼┼▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄┼┼┼┼┼┼
+┼┼┼┼┼┼┼█▒▒░░░░░░░░░▒▒█┼┼┼┼┼┼
+┼┼┼┼┼┼┼┼█░░█░░░░░█░░█┼┼┼┼┼┼┼
+┼┼┼┼─▄▄──█░░░▀█▀░░░█──▄▄─┼┼┼
+┼┼┼┼█░░█─▀▄░░░░░░░▄▀─█░░█┼┼┼
+┼██░██░████░██░░░██░░░█████┼
+┼██▄██░██▄▄░██░░░██░░░██░██┼
+┼██▀██░██▀▀░██░░░██░░░██░██┼
+┼██░██░████░████░████░█████┼
+</div>
 
 <p>
   <strong>Address:</strong>
@@ -32,7 +47,6 @@
 
 </div>
 
-<div class="containe">
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <% @master.photos.each_with_index do |photo, index|%>
@@ -63,17 +77,15 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-</div>
+
 
 <div class="container">
 
-<h1>______________FOOOOTEEEEEEEEEEEER________________________</h1>
-<h1>______________FOOOOTEEEEEEEEEEEER________________________</h1>
-<h1>______________FOOOOTEEEEEEEEEEEER________________________</h1>
-<h1>______________FOOOOTEEEEEEEEEEEER________________________</h1>
-<h1>______________FOOOOTEEEEEEEEEEEER________________________</h1>
-<h1>______________FOOOOTEEEEEEEEEEEER________________________</h1>
-<h1>______________FOOOOTEEEEEEEEEEEER________________________</h1>
-<h1>______________FOOOOTEEEEEEEEEEEER________________________</h1>
-<h1>______________FOOOOTEEEEEEEEEEEER________________________</h1>
+<h1>______________REVIEW________________________</h1>
+<<h1>______________REVIEW________________________</h1>
+<h1>______________REVIEW________________________</h1>
+<h1>______________REVIEW________________________</h1>
+<h1>______________REVIEW________________________</h1>
+<h1>______________REVIEW________________________</h1>
+<h1>______________REVIEW________________________</h1>
 </div>
