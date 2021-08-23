@@ -1,91 +1,68 @@
-<div class="container">
+<section class="abaout container">
 
-<h1>Esto es un Show de master</h1>
+  <figure class="abaout__img">
+    <h2 class="subtitle"><%= @master.user.first_name.upcase%> <%= @master.user.last_name.upcase %></h2>
+    <%= cl_image_tag @master.user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%>
+  </figure>
 
-
-<p>
-  <strong>Nombre:</strong>
-  <%= @master.user.first_name.upcase%> <%= @master.user.last_name.upcase %>
-</p>
-
-<%= cl_image_tag @master.user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%> 
-
-
-<div class="descripcion"><strong>description:</strong>
-  <%= @master.description %>
-</div>
-<div class="boton-contratar">
-<button type="button" class="btn btn-warning">Contratar Maestro</button>
-</div>
-
-<div class="mapa-dibujo">
-┼┼┼┼┼┼┼▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄┼┼┼┼┼┼
-┼┼┼┼┼┼┼█▒▒░░░░░░░░░▒▒█┼┼┼┼┼┼
-┼┼┼┼┼┼┼┼█░░█░░░░░█░░█┼┼┼┼┼┼┼
-┼┼┼┼─▄▄──█░░░▀█▀░░░█──▄▄─┼┼┼
-┼┼┼┼█░░█─▀▄░░░░░░░▄▀─█░░█┼┼┼
-┼██░██░████░██░░░██░░░█████┼
-┼██▄██░██▄▄░██░░░██░░░██░██┼
-┼██▀██░██▀▀░██░░░██░░░██░██┼
-┼██░██░████░████░████░█████┼
-</div>
-
-<p>
-  <strong>Address:</strong>
-  <%= @master.commercial_address %>
-</p>
-
-<p>
-  <strong>schedule:</strong>
-  <%= @master.schedule %>
-</p>
-
-<p>
-  <strong>category</strong>
-  <%= @master.category.name %>
-</p>
-
-</div>
-
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <% @master.photos.each_with_index do |photo, index|%>
-        <% if index == 0 %>
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <% else %>
-          <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>"></li> 
-        <% end %>
-      <% end %>
-    </ol>
-    <div class="carousel-inner">
-      <% @master.photos.each_with_index do |photo, index|%>
-        <% if index == 0 %>
-          <div class="carousel-item active">
-        <% else %>
-          <div class="carousel-item">
-        <% end %>
-          <%= cl_image_tag photo.key, height: 900, width: 900, crop: :fill, class: "d-block w-100"%> 
-        </div>
-      <% end%>
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+  <div class="abaout__texts">
+    <h2 class="subtitle">
+      Descripción del Mastero
+    </h2>
+    <p class="abaout__paragraph">
+      <%= @master.description %>
+    </p>
+    <button type="button" class="btn btn-warning">CONTRATAR MAESTRO</button>
   </div>
 
+  <figure class="map__img">
+    <p>
+      ┼┼┼┼┼┼┼▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄┼┼┼┼┼┼
+      ┼┼┼┼┼┼┼█▒▒░░░░░░░░░▒▒█┼┼┼┼┼┼
+      ┼┼┼┼┼┼┼┼█░░█░░░░░█░░█┼┼┼┼┼┼┼
+      ┼┼┼┼─▄▄──█░░░▀█▀░░░█──▄▄─┼┼┼
+      ┼┼┼┼█░░█─▀▄░░░░░░░▄▀─█░░█┼┼┼
+      ┼██░██░████░██░░░██░░░█████┼
+      ┼██▄██░██▄▄░██░░░██░░░██░██┼
+      ┼██▀██░██▀▀░██░░░██░░░██░██┼
+      ┼██░██░████░████░████░█████┼
+    </p>
+  </figure>
 
-<div class="container">
+</section>
 
-<h1>______________REVIEW________________________</h1>
-<<h1>______________REVIEW________________________</h1>
-<h1>______________REVIEW________________________</h1>
-<h1>______________REVIEW________________________</h1>
-<h1>______________REVIEW________________________</h1>
-<h1>______________REVIEW________________________</h1>
-<h1>______________REVIEW________________________</h1>
-</div>
+<section class="projects">
+    <h2 class="subtitle-projects">
+      Trabajos Realizados
+    </h2>
+ <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <% @master.photos.each_with_index do |photo, index|%>
+          <% if index == 0 %>
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <% else %>
+            <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>"></li> 
+          <% end %>
+        <% end %>
+      </ol>
+  <div class="carousel-inner">
+    <% @master.photos.each_with_index do |photo, index|%>
+      <% if index == 0 %>
+        <div class="carousel-item active">
+      <% else %>
+        <div class="carousel-item">
+      <% end %>
+        <%= cl_image_tag photo.key, height: 900, width: 900, crop: :fill, class: "d-block w-100", id: "imagencarrusel"%> 
+      </div>
+    <% end%>
+  </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+  </div>
+</section>
