@@ -1,40 +1,46 @@
-<section class="abaout container">
+<section class="container">
 
-  <figure class="abaout__img">
-    <h2 class="subtitle"><%= @master.user.first_name.upcase%> <%= @master.user.last_name.upcase %></h2>
-    <%= cl_image_tag @master.user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%>
-  </figure>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <figure class="abaout__img">
+        <h2 class="subtitle text-center"><%= @master.user.first_name.upcase%> <%= @master.user.last_name.upcase %></h2>
+        <%= cl_image_tag @master.user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%>
+      </figure>
+    </div>
 
-  <div class="abaout__texts">
-    <h2 class="subtitle">
-      Descripción del Mastero
-    </h2>
-    <p class="abaout__paragraph">
-      <%= @master.description %>
-    </p>
-    <button type="button" class="btn btn-warning">CONTRATAR MAESTRO</button>
+    <div class="col-md-4 col-sm-12">
+      <div class="abaout__texts">
+        <h2 class="subtitle text-center">
+          Descripción del Mastero
+        </h2>
+        <p class="abaout__paragraph text-justify">
+         <%= @master.description %>
+        </p>
+        <button type="button" class="btn btn-warning rounded-pill" id="boton-contratar">CONTRATAR MAESTRO</button>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+       <figure class="map__img">
+          <p>
+            ┼┼┼┼┼┼┼▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄┼┼┼┼┼┼
+            ┼┼┼┼┼┼┼█▒▒░░░░░░░░░▒▒█┼┼┼┼┼┼
+            ┼┼┼┼┼┼┼┼█░░█░░░░░█░░█┼┼┼┼┼┼┼
+            ┼┼┼┼─▄▄──█░░░▀█▀░░░█──▄▄─┼┼┼
+            ┼┼┼┼█░░█─▀▄░░░░░░░▄▀─█░░█┼┼┼
+            ┼██░██░████░██░░░██░░░█████┼
+            ┼██▄██░██▄▄░██░░░██░░░██░██┼
+            ┼██▀██░██▀▀░██░░░██░░░██░██┼
+            ┼██░██░████░████░████░█████┼
+          </p>
+        </figure>
+    </div>
   </div>
-
-  <figure class="map__img">
-    <p>
-      ┼┼┼┼┼┼┼▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄┼┼┼┼┼┼
-      ┼┼┼┼┼┼┼█▒▒░░░░░░░░░▒▒█┼┼┼┼┼┼
-      ┼┼┼┼┼┼┼┼█░░█░░░░░█░░█┼┼┼┼┼┼┼
-      ┼┼┼┼─▄▄──█░░░▀█▀░░░█──▄▄─┼┼┼
-      ┼┼┼┼█░░█─▀▄░░░░░░░▄▀─█░░█┼┼┼
-      ┼██░██░████░██░░░██░░░█████┼
-      ┼██▄██░██▄▄░██░░░██░░░██░██┼
-      ┼██▀██░██▀▀░██░░░██░░░██░██┼
-      ┼██░██░████░████░████░█████┼
-    </p>
-  </figure>
-
+  
 </section>
 
 <section class="projects">
-    <h2 class="subtitle-projects">
-      Trabajos Realizados
-    </h2>
+
  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <% @master.photos.each_with_index do |photo, index|%>
@@ -52,6 +58,7 @@
       <% else %>
         <div class="carousel-item">
       <% end %>
+        <h1 class="text-banner">Trabajos Realizados</h1>
         <%= cl_image_tag photo.key, height: 900, width: 900, crop: :fill, class: "d-block w-100", id: "imagencarrusel"%> 
       </div>
     <% end%>
@@ -65,4 +72,5 @@
         <span class="sr-only">Next</span>
       </a>
   </div>
+
 </section>

@@ -13,14 +13,6 @@
   }
 }
 
-
-
-.abaout{
-  min-height: 200px;
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
 .projects{
   display:grid;
   grid-template-columns: 1fr;
@@ -30,4 +22,23 @@
   text-align: center;
   max-width: 100%;
   max-height: 100%;
+}
+
+.text-banner{
+  position:relative;
+  text-align: center;
+  display: block;
+  font-size:28px;
+  text-decoration: underline;
+}
+
+#boton-contratar{
+  margin: 0 auto;
+  display: block;
+  font-size: 25px;
+}
+
+.rounded-circle{
+  margin: 0 auto;
+  display:block;
 }
