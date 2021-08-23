@@ -1,4 +1,5 @@
 class MastersController < ApplicationController
+    skip_before_action :authenticate_user!, only: [:index, :show]
     before_action :set_master, only: [:show, :edit, :update, :destroy]
 
   # GET /masters

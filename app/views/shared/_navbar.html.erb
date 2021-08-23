@@ -1,5 +1,5 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon teal-color">
-  <%= link_to root_path, class: "navbar-brand btn btn-warning" do %>
+  <%= link_to root_path, class: "navbar-brand btn btn-warning rounded-pill" do %>
     <%= icon('fas', 'hard-hat', class: 'text-white mr-1') %><small class="text-white">MAESTROS-ONLINE</small>
   <% end %>
 
@@ -24,10 +24,10 @@
         </li>
       <% else %>
         <li class="nav-item mx-1">
-          <%= link_to "Iniciar Sesión", new_user_session_path, class: "nav-link btn btn-warning text-white" %>
+          <%= link_to "Iniciar Sesión", new_user_session_path, class: "nav-link btn btn-warning rounded-pill text-white" %>
         </li>
         <li class="nav-item mx-1">
-          <%= link_to "Registrarse", new_user_registration_path, class: "nav-link btn btn-warning text-white" %>
+          <%= link_to "Registrarse", new_user_registration_path, class: "nav-link btn btn-warning rounded-pill text-white" %>
         </li>
       <% end %>
     </ul>
