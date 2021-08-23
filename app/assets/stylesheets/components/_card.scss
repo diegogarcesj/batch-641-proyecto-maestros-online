@@ -8,6 +8,12 @@
   object-fit: cover;
 }
 
+.d-flex-special {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .card-category {
   background-size: cover;
   background-position: center;
