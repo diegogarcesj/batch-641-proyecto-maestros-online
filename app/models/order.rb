@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :master
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   validates :description, presence: true
   validates :date, presence: true
