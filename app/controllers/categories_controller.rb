@@ -6,6 +6,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
+      @masters = Master.where(category_id: @category.id)
   end
 
   def new

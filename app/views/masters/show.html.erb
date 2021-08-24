@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container my-5">
 
   <div class="row">
     <div class="col-md-4 col-sm-12">
@@ -21,22 +21,15 @@
     </div>
 
     <div class="col-md-4 col-sm-12">
-       <figure class="map__img">
-          <p>
-            ┼┼┼┼┼┼┼▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄┼┼┼┼┼┼
-            ┼┼┼┼┼┼┼█▒▒░░░░░░░░░▒▒█┼┼┼┼┼┼
-            ┼┼┼┼┼┼┼┼█░░█░░░░░█░░█┼┼┼┼┼┼┼
-            ┼┼┼┼─▄▄──█░░░▀█▀░░░█──▄▄─┼┼┼
-            ┼┼┼┼█░░█─▀▄░░░░░░░▄▀─█░░█┼┼┼
-            ┼██░██░████░██░░░██░░░█████┼
-            ┼██▄██░██▄▄░██░░░██░░░██░██┼
-            ┼██▀██░██▀▀░██░░░██░░░██░██┼
-            ┼██░██░████░████░████░█████┼
-          </p>
-        </figure>
+      <figure class="map__img">
+        <div id="map"
+              style="width: 100%; height: 300px;"
+              data-markers="<%= @markers.to_json %>"
+              data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      </figure>
     </div>
   </div>
-  
+
 </section>
 
 <section class="projects">
@@ -47,7 +40,7 @@
           <% if index == 0 %>
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <% else %>
-            <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>"></li> 
+            <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>"></li>
           <% end %>
         <% end %>
       </ol>
@@ -59,7 +52,7 @@
         <div class="carousel-item">
       <% end %>
         <h1 class="text-banner">Trabajos Realizados</h1>
-        <%= cl_image_tag photo.key, height: 900, width: 900, crop: :fill, class: "d-block w-100", id: "imagencarrusel"%> 
+        <%= cl_image_tag photo.key, height: 900, width: 900, crop: :fill, class: "d-block w-100", id: "imagencarrusel"%>
       </div>
     <% end%>
   </div>

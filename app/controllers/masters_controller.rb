@@ -4,11 +4,19 @@ class MastersController < ApplicationController
 
   # GET /masters
   def index
-    @masters = Master.all
+    if params[:query] || params[:ubication]
+      @category = Category.find_by("name ILIKE ?", "%" + params[:query] + "%")
+      if @category
+        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").or(Master.where(category_id: @category.id)).near(params[:ubication], 10)
+      else
+        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").near(params[:ubication], 10)
+      end
+    end
   end
 
   # GET /masters/1
   def show
+    @markers = [{lat:@master.latitude, lng:@master.longitude}]
   end
 
   # GET /masters/new
