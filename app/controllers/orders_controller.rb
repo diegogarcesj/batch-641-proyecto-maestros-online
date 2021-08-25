@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_master, only: [:create, :show]
+  before_action :set_master, only: [:show, :new, :create]
   before_action :set_order, only: [:show, :destroy]
 
   def index
@@ -15,12 +15,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(review_params)
+    @order = Order.new(order_params)
     @order.master = @master
     @order.user = current_user
 
     if @order.save
-      redirect_to order_path(@order)
+      redirect_to master_order_path(@order)
     else
       render :new
     end
@@ -50,6 +50,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:review).permit(:description, :date, :status)
+    params.require(:order).permit(:description, :date, :status, :hours)
   end
 end

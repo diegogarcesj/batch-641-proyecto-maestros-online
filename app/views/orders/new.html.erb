@@ -1,0 +1,15 @@
+<div class="container mt-3 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <h2>Crear nueva Orden</h2>
+      <%= simple_form_for [@master, @order] do |f| %>
+      <%= f.input :description %>
+      <%= f.input :date %>
+      <%= f.input :hours %>
+      <%= f.submit "Crear nueva Orden", class: 'btn btn-warning rounded-pill' %>
+      <% end %>
+      <%= link_to 'Go to Orders', master_orders_path(@master) %> |
+      <%= link_to 'Back', master_path(@master) %>
+    </div>
+  </div>
+</div>
