@@ -1,8 +1,6 @@
 <div class="container mb-5">
   <div class="wrapper">
-  <% if @masters.empty? %>
-    <p>No se encontraron resultados.</p>
-  <% else %>
+  <% if @masters %>
     <% @masters.each do |master| %>
         <div class="bg-white d-flex-special rounded-bottom shadow h-100">
           <div class="p-3 d-flex flex-column">
@@ -20,6 +18,8 @@
           <%= cl_image_tag master.photos[0].key, crop: :fill, class: 'rounded img-fluid img-responsive'%>
         </div>
     <% end %>
+  <% else %>
+     <p>No se encontraron resultados.</p>
   <% end %>
   </div>
 </div>

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_master, only: [:create, :new]
+  before_action :set_master, only: [:show, :new, :create]
   before_action :set_order, only: [:show, :destroy]
 
   def index
@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @review = Review.new
   end
 
   def new

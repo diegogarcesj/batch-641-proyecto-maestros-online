@@ -8,4 +8,6 @@ class Order < ApplicationRecord
   validates :status, presence: true
   validates :user_id, presence: true
   validates :master_id, presence: true
+
+  enum status: [ :propuesto, :cancelado, :aceptado, :rechazado, :pagado, :hecho ]
 end
