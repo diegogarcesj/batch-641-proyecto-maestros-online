@@ -1,13 +1,17 @@
-<h1>esto es un edit de masters</h1>
+<div class="container mt-3 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <h1 class="title text-center">Actualizando Maestro</h1>
 
-<h1>Esto es un new master</h1>
-
-<%= simple_form_for @master do |f| %>
-  <%= f.input :description %>
-  <%= f.input :commercial_address %>
-  <%= f.input :schedule %>
-  <%= f.input :price_per_hour %>
-  <%= f.association :category %>
-  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-  <%= f.submit %>
-<% end %>
+      <%= simple_form_for @master do |f| %>
+        <%= f.input :description, label: 'Descripción de su labor, sea específico.' %>
+        <%= f.input :commercial_address, label: 'Dirección Comercial u oficina.' %>
+        <%= f.input :schedule, label: 'Horario de Trabajo, Ejemplo, Lunes a Viernes desde 8:00 A.M hasta 18:00 P.M' %>
+        <%= f.input :price_per_hour, label: 'Precio por Hora de Trabajo.' %>
+        <%= f.association :category, label: 'Categoría de su especialidad.' %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true }, label: 'Fotos de sus Trabajos.' %>
+        <%= f.submit "Actualizar", class: "btn btn-warning rounded-pill"%>
+      <% end %>
+    </div>
+  </div>
+</div>

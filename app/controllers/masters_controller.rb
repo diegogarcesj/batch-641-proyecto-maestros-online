@@ -49,10 +49,12 @@ class MastersController < ApplicationController
     end
   end
 
+  
   # DELETE /masters/1
   def destroy
+    @user = @master.user
     @master.destroy
-    redirect_to masters_url
+    redirect_to user_path(@user)
   end
 
 
