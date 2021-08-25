@@ -12,6 +12,14 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    @review = Review.new(review_params)
+    @review.order = @order
+    @review.rating = 1
+    if @review.save
+      redirect_to master_order_path(@order)
+    else
+      render 'orders/show'
+    end
   end
 
   def edit
@@ -37,6 +45,10 @@ class ReviewsController < ApplicationController
 
   def set_review
     @review = Review.find(params[:id])
+  end
+
+  def set_order
+    @order = Order.find(params[:order_id])
   end
 
   def review_params

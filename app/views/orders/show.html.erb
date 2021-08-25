@@ -1,0 +1,53 @@
+<div class="container card mt-5 mb-5 pt-3">
+<h2>Orden de trabajo</h2>
+<!-- Informacion de la orden -->
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+    <h5>Cliente:</h5>
+    <%= cl_image_tag @order.user.photo.key, height: 100, width: 100, crop: :fill, class: "rounded-circle"%>
+    <h4 class="text-center"><%= @order.user.full_name %></h4>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <h5>Maestro:</h5>
+    <%= cl_image_tag @order.master.user.photo.key, height: 100, width: 100, crop: :fill, class: "rounded-circle"%>
+    <h4 class="text-center"><%= @order.master.user.full_name %></h4>
+  </div>
+</div>
+<hr>
+
+<p>Descripcion del trabajo: <strong><%= @order.description %></strong></p>
+<p>Fecha del trabajo: <strong><%= @order.date %></strong></p>
+<p>Precio del trabajo: <strong><%= @master.price_per_hour * 4 %></strong></p>
+<p>Estado de la orden: <strong><%= @order.status.capitalize %></strong></p>
+
+<!-- Botones de acciones sobre la orden -->
+
+<%= link_to "Accion sobre la orden (condicionales)", master_order_path(@order), class: "btn btn-warning rounded-pill" %>
+<hr>
+<!-- Seccion del y new del Review -->
+
+<div class="row">
+<div class="col-sm-12 col-md-6">
+<h4>Comentarios</h4>
+<% @order.reviews.each do |review| %>
+  <%= (icon('fas', 'star', class: 'text-warning') + " ") * review.rating %> <em class="date"><%= review.created_at %></em><br />
+  <p><strong> <%= review.description %> </strong></p>
+  <hr>
+<% end %>
+</div>
+
+<div class="col-sm-12 col-md-6 card">
+  <div class="card-body">
+    <h5>Agrega un comentario</h5>
+    <%= simple_form_for [@master, @order, @review] do |f| %>
+      <%= f.input :description, label: 'Comentario' %>
+      <%= f.input :rating, collection: 1..5, input_html: { id: 'bar-rating-stars' } %>
+      <%= f.submit "Comentar", class: 'btn btn-warning rounded-pill' %>
+    <% end %>
+  </div>
+</div>
+
+</div>
+
+
+</div>
