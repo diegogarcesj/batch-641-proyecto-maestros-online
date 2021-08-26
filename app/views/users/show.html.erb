@@ -3,8 +3,8 @@
     <div class="row">
         <div class="col-md-4 col-sm-12">
             <figure class="abaout__img">
-                <h2 class="subtitle text-center"><%= @user.first_name.upcase%> <%= @user.last_name.upcase %></h2>
                 <%= cl_image_tag @user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%>
+                <h2 class="subtitle text-center"><%= @user.first_name.capitalize%> <%= @user.last_name.capitalize %></h2>
             </figure>
         </div>
 
@@ -35,12 +35,12 @@
                         </div>
                     </div>
                 </p>
-                <%= link_to "Editar Usuario", edit_user_registration_path, class: "btn btn-warning rounded-pill" %>
+                <%= link_to "Editar Usuario", edit_user_registration_path, class: "btn btn-warning rounded-pill col-12 my-1" %>
                 <% if Master.find_by(user_id: @user.id) %>
-                    <%= link_to "Editar Master", edit_master_path, class: "btn btn-warning rounded-pill" %>
-                    <%= link_to 'Dejar de ser Master', master_path(@user.master), method: :delete, data: { confirm: 'Estas seguro de tu desición?' }, class: "btn btn-danger rounded-pill" %>
+                    <%= link_to "Editar Master", edit_master_path(@user.master), class: "btn btn-warning rounded-pill col-12 my-1" %>
+                    <%= link_to 'Dejar de ser Master', master_path(@user.master), method: :delete, data: { confirm: '¿Estás seguro de tu decisión?' }, class: "btn btn-danger rounded-pill col-12 my-1" %>
                 <% else %>
-                    <%= link_to "Convierte en Master", new_master_path, class: "btn btn-warning rounded-pill" %>
+                    <%= link_to "Convierte en Master", new_master_path, class: "btn btn-warning rounded-pill col-12 my-1" %>
                 <% end %>
             </div>
         </div>

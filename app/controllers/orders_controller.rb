@@ -18,13 +18,13 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.master = @master
     @order.user = current_user
+    @order.status = 0
 
     if @order.save
-      redirect_to master_order_path(@order)
+      redirect_to master_order_path(@master, @order)
     else
       render :new
     end
-
   end
 
   def edit
