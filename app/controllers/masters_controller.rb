@@ -3,21 +3,21 @@ class MastersController < ApplicationController
     before_action :set_master, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:query] && params[:ubication]
+    if params[:query] && params[:query] != "" && params[:ubication] && params[:ubication] != ""
       @category = Category.find_by("name ILIKE ?", "%" + params[:query] + "%")
       if @category
         @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").or(Master.where(category_id: @category.id)).near(params[:ubication], 10)
       else
         @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").near(params[:ubication], 10)
       end
-    elsif params[:query]
+    elsif params[:query] && params[:query] != ""
       @category = Category.find_by("name ILIKE ?", "%" + params[:query] + "%")
       if @category
         @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").or(Master.where(category_id: @category.id))
       else
         @masters = Master.where("description ILIKE ?", "%#{params[:query]}%")
       end
-    elsif params[:ubication]
+    elsif params[:ubication] && params[:ubication] != ""
         @masters = Master.near(params[:ubication], 10)
     else
         @masters = Master.all
