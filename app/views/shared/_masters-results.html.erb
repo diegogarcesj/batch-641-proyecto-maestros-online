@@ -1,25 +1,27 @@
 <div class="container mb-5">
   <div class="wrapper">
-  <% if @masters %>
-    <% @masters.each do |master| %>
+  <% if @masters.nil? || @masters.empty? %>
+    <p>No se encontraron resultados.</p>
+  <% else %>
+     <% @masters.each do |master| %>
+        <%= link_to master_path(master) do %>
         <div class="bg-white d-flex-special rounded-bottom shadow h-100">
           <div class="p-3 d-flex flex-column">
             <div class="d-flex justify-content-between">
               <div>
-                  <strong><%= master.user.full_name %><span class="text-muted font-weight-normal">•</span></strong>
-                  <small><p><%= master.description%></p></small>
+                  <h6><strong><%= master.user.full_name %><span class="text-muted font-weight-normal">•</span></strong></h6>
                   <strong><i class="fas fa-star star-yellow"></i></strong>
+                  <small><p><%= master.description%></p></small>
               </div>
               <div >
-                <%= cl_image_tag master.user.photo.key, crop: :fill, class: 'avatar-bordered avatar-custom' %>
+                <%= cl_image_tag master.user.photo.key, width: 50, height: 50, crop: :fill, class: 'avatar-bordered avatar-custom' %>
               </div>
             </div>
           </div>
           <%= cl_image_tag master.photos[0].key, crop: :fill, class: 'rounded img-fluid img-responsive'%>
         </div>
+        <% end %>
     <% end %>
-  <% else %>
-     <p>No se encontraron resultados.</p>
   <% end %>
   </div>
 </div>

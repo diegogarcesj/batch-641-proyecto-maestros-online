@@ -3,8 +3,8 @@
   <div class="row">
     <div class="col-md-4 col-sm-12">
       <figure class="abaout__img">
-        <h2 class="subtitle text-center"><%= @master.user.first_name.upcase%> <%= @master.user.last_name.upcase %></h2>
         <%= cl_image_tag @master.user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%>
+        <h2 class="subtitle text-center"><%= @master.user.first_name.capitalize%> <%= @master.user.last_name.capitalize %></h2>
       </figure>
     </div>
 
@@ -16,7 +16,7 @@
         <p class="abaout__paragraph text-justify">
          <%= @master.description %>
         </p>
-        <button type="button" class="btn btn-warning rounded-pill" id="boton-contratar">CONTRATAR MAESTRO</button>
+        <%= link_to "Contratar Maestro", new_master_order_path(@master), class: 'btn btn-warning rounded-pill', id: 'boton-contratar' %>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
 </section>
 
 <section class="projects">
-
+<h1 class="text-banner">Trabajos Realizados</h1>
  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <% @master.photos.each_with_index do |photo, index|%>
@@ -51,7 +51,6 @@
       <% else %>
         <div class="carousel-item">
       <% end %>
-        <h1 class="text-banner">Trabajos Realizados</h1>
         <%= cl_image_tag photo.key, height: 900, width: 900, crop: :fill, class: "d-block w-100", id: "imagencarrusel"%>
       </div>
     <% end%>

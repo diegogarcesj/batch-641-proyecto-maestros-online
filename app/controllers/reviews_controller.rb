@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:destroy, :edit]
+  before_action :set_master, only: [:create]
+  before_action :set_order, only: [:create]
 
   def index
     @reviews = Review.all
@@ -14,9 +16,10 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.order = @order
-    @review.rating = 1
+    @review.user = current_user
+    @review.rating = 1 # TO DO
     if @review.save
-      redirect_to master_order_path(@order)
+      redirect_to master_order_path(@master, @order)
     else
       render 'orders/show'
     end
@@ -49,6 +52,10 @@ class ReviewsController < ApplicationController
 
   def set_order
     @order = Order.find(params[:order_id])
+  end
+
+  def set_master
+    @master = Master.find(params[:master_id])
   end
 
   def review_params

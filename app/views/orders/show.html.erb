@@ -22,7 +22,7 @@
 
 <!-- Botones de acciones sobre la orden -->
 
-<%= link_to "Accion sobre la orden (condicionales)", master_order_path(@order), class: "btn btn-warning rounded-pill" %>
+<%= link_to "Accion sobre la orden (condicionales)", master_order_path(@master, @order), class: "btn btn-warning rounded-pill" %>
 <hr>
 <!-- Seccion del y new del Review -->
 
@@ -30,6 +30,7 @@
 <div class="col-sm-12 col-md-6">
 <h4>Comentarios</h4>
 <% @order.reviews.each do |review| %>
+  <%= cl_image_tag review.user.photo.key, height: 40, width: 40, crop: :fill, class: "avatar"%>
   <%= (icon('fas', 'star', class: 'text-warning') + " ") * review.rating %> <em class="date"><%= review.created_at %></em><br />
   <p><strong> <%= review.description %> </strong></p>
   <hr>
