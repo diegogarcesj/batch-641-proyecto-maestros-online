@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :set_master, only: [:show, :new, :create]
-  before_action :set_order, only: [:show, :destroy]
+  before_action :set_master, only: [:show, :new, :create, :edit]
+  before_action :set_order, only: [:show, :destroy, :edit]
 
   def index
     @orders = Order.all
