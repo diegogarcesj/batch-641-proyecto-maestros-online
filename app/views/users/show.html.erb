@@ -37,6 +37,7 @@
                 </p>
                 <%= link_to "Editar Usuario", edit_user_registration_path, class: "btn btn-warning rounded-pill col-12 my-1" %>
                 <% if Master.find_by(user_id: @user.id) %>
+                    <%= link_to "Perfil Público Master", master_path(@user.master), class: "btn btn-warning rounded-pill col-12 my-1" %>
                     <%= link_to "Editar Master", edit_master_path(@user.master), class: "btn btn-warning rounded-pill col-12 my-1" %>
                     <%= link_to 'Dejar de ser Master', master_path(@user.master), method: :delete, data: { confirm: '¿Estás seguro de tu decisión?' }, class: "btn btn-danger rounded-pill col-12 my-1" %>
                 <% else %>
@@ -56,5 +57,75 @@
     </div>
 </section>
 
+<section class="container my-5">
 
+    <% if Master.find_by(user_id: @user.id) %>
+        <div class="list-group">
+            <h3 class="subtitle text-center">Historial de Ordenes.</h3>
+                <% @user.master.orders.each_with_index do |order, index| %>
+                    <% if index == 0 %>
+                        <a class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                                <div><%= cl_image_tag order.user.photo.key, height: 50, width: 50, crop: :fill, class: "inline rounded-circle"%></div>
+                                <small><%= order.date %></small>
+                            </div>
+                            <p class="mb-1"><%= order.description %></p>
+                            <small><p>Solicitada por el Usuario: <strong> <%= order.user.full_name %></strong></p></small>
+                            <small>Estado: <strong><%= order.status.capitalize %></small></strong>
+                        </a>
+                    <% else %>
+                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <div><%= cl_image_tag order.user.photo.key, height: 50, width: 50, crop: :fill, class: "inline rounded-circle"%></div>
+                                <small><%= order.date %></small>
+                            </div>
+                            <p class="mb-1"><%= order.description %></p>
+                            <small><p>Solicitada por el Usuario: <strong> <%= order.user.full_name %></strong></p></small>
+                            <small>Estado: <strong><%= order.status.capitalize %></small></strong>
+                        </a>
+                    <% end %>
+                <% end %>
+        </div>
+    <% else %>
+        <div class="list-group">
+            <h3 class="subtitle text-center">Historial de Ordenes.</h3>
+                <% @user.orders.each_with_index do |order, index| %>
+                    <% if index == 0 %>
+                        <a class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                                 <div><%= cl_image_tag order.master.user.photo.key, height: 50, width: 50, crop: :fill, class: "inline rounded-circle"%></div>
+                                <small><%= order.date %></small>
+                            </div>
+                            <p class="mb-1"><%= order.description %></p>
+                            <small><p>Solicitada al Maestro: <strong> <%= order.master.user.full_name %></strong></p></small>
+                            <small>Estado: <strong><%= order.status.capitalize %></small></strong>
+                        </a>
+                    <% else %>
+                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <div><%= cl_image_tag order.master.user.photo.key, height: 50, width: 50, crop: :fill, class: "inline rounded-circle"%></div>
+                                <small><%= order.date %></small>
+                            </div>
+                            <p class="mb-1"><%= order.description %></p>
+                            <small><p>Solicitada al Maestro: <strong> <%= order.master.user.full_name %></strong></p></small>
+                            <small>Estado: <strong><%= order.status.capitalize %></small></strong>
+                        </a>
+                    <% end %>
+                <% end %>
+        </div>
+    <% end %>
+    
+</section>
+
+
+<% if Master.find_by(user_id: @user.id) %>
+    <ul>
+        <% @user.master.orders.each do |order| %>
+            <li><div class="alert alert-info">
+                <strong>Info!</strong> Tienes un Orden Pendiente, Revisala!.
+            </div>
+            </li>
+        <% end %>
+    </ul>
+<% end %>
 
