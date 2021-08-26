@@ -17,6 +17,7 @@
          <%= @master.description %>
         </p>
         <%= link_to "Contratar Maestro", new_master_order_path(@master), class: 'btn btn-warning rounded-pill', id: 'boton-contratar' %>
+        <%= link_to 'Back', category_path(@master.category_id)%>
       </div>
     </div>
 
@@ -31,6 +32,7 @@
   </div>
 
 </section>
+
 
 <section class="projects">
 <h1 class="text-banner">Trabajos Realizados</h1>
@@ -65,4 +67,25 @@
       </a>
   </div>
 
+</section>
+
+<section>
+<div class="container mt-3 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-8">
+  <% if @master.reviews.nil? || @master.reviews.empty? %>
+    <p>No hay comentarios de las Ordenes de Trabajo.</p>
+  <% else %>
+     <% @master.reviews.where("rating > ?", 0).each do |review| %>
+        <div>
+              <h6><strong><%= review.description %><span class="text-muted font-weight-normal">•</span></strong></h6>
+              <%review.rating.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+        <div>
+      <% end %>    
+  <% end %>
+  </div>
+  </div>
+</div>
 </section>
