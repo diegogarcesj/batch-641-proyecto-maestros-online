@@ -1,4 +1,4 @@
-<div class="container card mt-5 mb-5 pt-3">
+<div class="container mt-5 mb-5 pt-3">
 <h2>Orden de trabajo</h2>
 <!-- Informacion de la orden -->
 <div class="row">
@@ -15,34 +15,64 @@
 </div>
 <hr>
 
-<p>Descripcion del trabajo: <strong><%= @order.description %></strong></p>
-<p>Fecha del trabajo: <strong><%= @order.date %></strong></p>
-<p>Precio del trabajo: <strong><%= @master.price_per_hour * 4 %></strong></p>
-<p>Estado de la orden: <strong><%= @order.status.capitalize %></strong></p>
+<div class="row justify-content-center">
+  <div class="col-sm-12 col-md-8">
+  <p>Descripcion del trabajo: <strong><%= @order.description %></strong></p>
+  <p>Fecha del trabajo: <strong><%= @order.date %></strong></p>
+  <p>Precio del trabajo: <strong><%= @master.price_per_hour * 4 %></strong></p>
+  <p>Estado de la orden: <strong><%= @order.status.capitalize %></strong></p>
 
 <!-- Botones de acciones sobre la orden -->
 
-<%= link_to "Accion sobre la orden (condicionales)", master_order_path(@master, @order), class: "btn btn-warning rounded-pill" %>
+  <% if current_user == @order.user %>
+    <%= link_to "Editar orden", edit_master_order_path(@master, @order), class: "btn btn-warning rounded-pill col-12 my-1" %>
+    <%= link_to "Cancelar orden", master_order_cancel_path(@master, @order), class: "btn btn-warning rounded-pill col-12 my-1" %>
+    <% if @order.aceptado? %>
+      <%= link_to "Pagar orden", master_order_pay_path(@master, @order), class: "btn btn-warning rounded-pill col-12 my-1" %>
+    <% elsif @order.pagado? %>
+      <%= link_to "Orden terminada", master_order_done_path(@master, @order), class: "btn btn-warning rounded-pill col-12 my-1" %>
+    <% end %>
+  <% elsif current_user == @order.master.user %>
+    <% if @order.propuesto? %>
+    <%= link_to "Aceptar orden", master_order_accept_path(@master, @order), class: "btn btn-warning rounded-pill col-12 my-1" %>
+    <%= link_to "Rechazar orden", master_order_reject_path(@master, @order), class: "btn btn-warning rounded-pill col-12 my-1" %>
+    <% end %>
+  <% end %>
+
+  </div>
+</div>
+
 <hr>
 <!-- Seccion del y new del Review -->
 
 <div class="row">
 <div class="col-sm-12 col-md-6">
 <h4>Comentarios</h4>
-<% @order.reviews.each do |review| %>
-  <%= cl_image_tag review.user.photo.key, height: 40, width: 40, crop: :fill, class: "avatar"%>
-  <%= (icon('fas', 'star', class: 'text-warning') + " ") * review.rating %> <em class="date"><%= review.created_at %></em><br />
+<% @order.reviews.reverse.each do |review| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= cl_image_tag review.user.photo.key, height: 40, width: 40, crop: :fill, class: "avatar"%>
+      <%= review.user.full_name %>
+      <%= (icon('fas', 'star', class: 'text-warning') + " ") * review.rating unless review.rating.nil? %>
+    </div>
+    <div>
+      <small><em class="date"><%= review.created_at %></em></small>
+    </div>
+  </div>
   <p><strong> <%= review.description %> </strong></p>
   <hr>
 <% end %>
 </div>
 
-<div class="col-sm-12 col-md-6 card">
-  <div class="card-body">
-    <h5>Agrega un comentario</h5>
+<div class="col-sm-12 col-md-6">
+  <div>
+    <h4>Agrega un comentario</h4>
     <%= simple_form_for [@master, @order, @review] do |f| %>
       <%= f.input :description, label: 'Comentario' %>
+      <% if @order.hecho? && current_user == @order.user %>
+      <p><strong>Ahora que la orden está terminada, puedes valorarla:</strong></p>
       <%= f.input :rating, collection: 1..5, input_html: { id: 'bar-rating-stars' } %>
+      <% end %>
       <%= f.submit "Comentar", class: 'btn btn-warning rounded-pill' %>
     <% end %>
   </div>
