@@ -9,9 +9,22 @@
           <div class="p-3 d-flex flex-column">
             <div class="d-flex justify-content-between">
               <div>
-                  <h6><strong><%= master.user.full_name %><span class="text-muted font-weight-normal">•</span></strong></h6>
-                  <strong><i class="fas fa-star star-yellow"></i></strong>
+                  <h6 class="mb-1"><strong><%= master.user.full_name %></strong></h6>
+                  <% n = 0 %>
+                  <% sum = 0 %>
+                  <% master.reviews.where("rating > ?", 0).each do |review| %>
+                    <% n += 1 %>
+                    <% sum += review.rating %>
+                  <% end %>
+                  <% if n > 0 %>
+                    <% (sum.to_f / n).round.times do %>
+                        <%= icon('fas', 'star', class: 'text-warning') %>
+                    <% end %>
+                  <% else %>
+                    <small class="text-secondary">Sin valoraciones a&uacute;n</small>
+                  <% end %>
                   <small><p><%= master.description%></p></small>
+                  <small><p>Precio por hora: <span class="text-warning"><strong><%= master.price_per_hour%></strong></span></p></small>
               </div>
               <div >
                 <%= cl_image_tag master.user.photo.key, width: 50, height: 50, crop: :fill, class: 'avatar-bordered avatar-custom' %>
