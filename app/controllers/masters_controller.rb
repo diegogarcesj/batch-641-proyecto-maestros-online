@@ -6,21 +6,21 @@ class MastersController < ApplicationController
     if params[:query] && params[:query] != "" && params[:ubication] && params[:ubication] != ""
       @category = Category.find_by("name ILIKE ?", "%" + params[:query] + "%")
       if @category
-        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").or(Master.where(category_id: @category.id)).near(params[:ubication], 10)
+        @masters = policy_scope(Master).where("description ILIKE ?", "%#{params[:query]}%").or(policy_scope(Master).where(category_id: @category.id)).near(params[:ubication], 10)
       else
-        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").near(params[:ubication], 10)
+        @masters = policy_scope(Master).where("description ILIKE ?", "%#{params[:query]}%").near(params[:ubication], 10)
       end
     elsif params[:query] && params[:query] != ""
       @category = Category.find_by("name ILIKE ?", "%" + params[:query] + "%")
       if @category
-        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").or(Master.where(category_id: @category.id))
+        @masters = policy_scope(Master).where("description ILIKE ?", "%#{params[:query]}%").or(policy_scope(Master).where(category_id: @category.id))
       else
-        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%")
+        @masters = policy_scope(Master).where("description ILIKE ?", "%#{params[:query]}%")
       end
     elsif params[:ubication] && params[:ubication] != ""
-        @masters = Master.near(params[:ubication], 10)
+        @masters = policy_scope(Master).near(params[:ubication], 10)
     else
-        @masters = Master.all
+        @masters = policy_scope(Master).all
     end
   end
 
