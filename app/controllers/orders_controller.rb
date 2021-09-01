@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_master, only: [:show, :new, :create, :edit, :update, :cancel, :accept, :reject, :pay, :done]
   before_action :set_order, only: [:show, :destroy, :edit, :update]
+  before_action :set_order_with_params_for_status, only: [:cancel, :accept, :reject, :pay, :done]
 
   def index
     @orders = Order.all
@@ -12,6 +13,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    authorize @order
   end
 
   def create
@@ -19,6 +21,7 @@ class OrdersController < ApplicationController
     @order.master = @master
     @order.user = current_user
     @order.status = 0
+    authorize @order
 
     if @order.save
       redirect_to master_order_path(@master, @order)
@@ -50,53 +53,28 @@ class OrdersController < ApplicationController
   end
 
   def cancel
-    @order = Order.find(params[:order_id])
     @order.cancelado!
-    if @order.save
-      redirect_to master_order_path(@master, @order)
-    else
-      render :show
-    end
+    save_after_action
   end
 
   def accept
-    @order = Order.find(params[:order_id])
     @order.aceptado!
-    if @order.save
-      redirect_to master_order_path(@master, @order)
-    else
-      render :show
-    end
+    save_after_action
   end
 
   def reject
-    @order = Order.find(params[:order_id])
     @order.rechazado!
-    if @order.save
-      redirect_to master_order_path(@master, @order)
-    else
-      render :show
-    end
+    save_after_action
   end
 
   def pay
-    @order = Order.find(params[:order_id])
     @order.pagado!
-    if @order.save
-      redirect_to master_order_path(@master, @order)
-    else
-      render :show
-    end
+    save_after_action
   end
 
   def done
-    @order = Order.find(params[:order_id])
     @order.hecho!
-    if @order.save
-      redirect_to master_order_path(@master, @order)
-    else
-      render :show
-    end
+    save_after_action
   end
 
 
@@ -108,6 +86,20 @@ class OrdersController < ApplicationController
 
   def set_order
     @order = Order.find(params[:id])
+    authorize @order
+  end
+
+  def set_order_with_params_for_status
+    @order = Order.find(params[:order_id])
+    authorize @order
+  end
+
+  def save_after_action
+    if @order.save
+      redirect_to master_order_path(@master, @order)
+    else
+      render :show
+    end
   end
 
   def order_params

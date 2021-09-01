@@ -2,17 +2,18 @@
   <div class="row justify-content-center">
     <div class="col-6">
       <h1 class="title text-center">Conviertete en Maestro</h1>
-
-      <%= simple_form_for @master do |f| %>
-        <%= f.input :description, label: 'Descripción de su labor, sea específico.' %>
-        <%= f.input :commercial_address, label: 'Dirección Comercial u oficina.' %>
-        <%= f.input :schedule, label: 'Horario de Trabajo, Ejemplo, Lunes a Viernes desde 8:00 A.M hasta 18:00 P.M' %>
-        <%= f.input :price_per_hour, label: 'Precio por Hora de Trabajo.' %>
-        <%= f.association :category, label: 'Categoría de su especialidad.' %>
-        <%= f.input :photos, as: :file, input_html: { multiple: true }, label: 'Fotos de sus Trabajos.' %>
-        <%= f.submit "Hazte Maestro", class: "btn btn-warning rounded-pill"%>
+      <% if policy(Master).create? %>
+        <%= simple_form_for @master do |f| %>
+          <%= f.input :description, label: 'Descripción de su labor, sea específico.' %>
+          <%= f.input :commercial_address, label: 'Dirección Comercial u oficina.' %>
+          <%= f.input :schedule, label: 'Horario de Trabajo, Ejemplo, Lunes a Viernes desde 8:00 A.M hasta 18:00 P.M' %>
+          <%= f.input :price_per_hour, label: 'Precio por Hora de Trabajo.' %>
+          <%= f.association :category, label: 'Categoría de su especialidad.' %>
+          <%= f.input :photos, as: :file, input_html: { multiple: true }, label: 'Fotos de sus Trabajos.' %>
+          <%= f.submit "Hazte Maestro", class: "btn btn-warning rounded-pill"%>
+        <% end %>
+        <%= link_to "Back", :back %>
       <% end %>
-      <%= link_to "Back", :back %>
     </div>
   </div>
 </div>

@@ -14,8 +14,10 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def new?
+    create?
   end
 
   def create?
+    user.admin
   end
 end

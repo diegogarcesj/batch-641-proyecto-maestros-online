@@ -6,11 +6,11 @@ class CategoriesController < ApplicationController
   end
 
   def show
-
   end
 
   def new
     @category = Category.new
+    authorize @category
   end
 
   def create
