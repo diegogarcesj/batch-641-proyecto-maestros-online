@@ -5,19 +5,20 @@
       <figure class="abaout__img">
         <%= cl_image_tag @master.user.photo.key, height: 217, width: 217, crop: :fill, class: "rounded-circle"%>
         <h2 class="subtitle text-center"><%= @master.user.first_name.capitalize%> <%= @master.user.last_name.capitalize %></h2>
+        <h5 class="subtitle text-center"><%= @master.category.name %></h5>
       </figure>
     </div>
 
     <div class="col-md-4 col-sm-12">
       <div class="abaout__texts">
-        <h2 class="subtitle text-center">
-          Descripción del Mastero
-        </h2>
+        <h4 class="subtitle"><strong>Descripci&oacute;n del Maestro</strong></h4>
         <p class="abaout__paragraph text-justify">
          <%= @master.description %>
         </p>
-        <%= link_to "Contratar Maestro", new_master_order_path(@master), class: 'btn btn-warning rounded-pill', id: 'boton-contratar' %>
-        <%= link_to 'Back', category_path(@master.category_id)%>
+        <p>Disponibilidad horaria: <strong><%= @master.schedule %></strong></p>
+        <p>Precio por hora: <strong><%= @master.price_per_hour %></strong></p>
+        <%= link_to "Contratar", new_master_order_path(@master), class: 'btn btn-warning rounded-pill col-12 my-1', id: 'boton-contratar' %>
+        <%= link_to 'Atrás', category_path(@master.category_id), class: 'btn btn-warning rounded-pill col-12 my-1'%>
       </div>
     </div>
 
@@ -26,7 +27,8 @@
         <div id="map"
               style="width: 100%; height: 300px;"
               data-markers="<%= @markers.to_json %>"
-              data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+              data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+              class="rounded"></div>
       </figure>
     </div>
   </div>
@@ -35,7 +37,7 @@
 
 
 <section class="projects">
-<h1 class="text-banner">Trabajos Realizados</h1>
+<h4 class="text-center">Trabajos Realizados</h4>
  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <% @master.photos.each_with_index do |photo, index|%>
@@ -73,17 +75,20 @@
 <div class="container mt-3 mb-5">
   <div class="row justify-content-center">
     <div class="col-8">
+    <h4>Referencias de clientes</h4>
   <% if @master.reviews.nil? || @master.reviews.empty? %>
     <p>No hay comentarios de las Ordenes de Trabajo.</p>
   <% else %>
      <% @master.reviews.where("rating > ?", 0).each do |review| %>
         <div>
-              <h6><strong><%= review.description %><span class="text-muted font-weight-normal">•</span></strong></h6>
-              <%review.rating.times do %>
-                <i class="fas fa-star star-yellow"></i>
-              <% end %>
+          <%= cl_image_tag review.user.photo.key, height: 40, width: 40, crop: :fill, class: "avatar"%>
+          <% review.rating.times do %>
+          <%= icon('fas', 'star', class: 'text-warning') %>
+          <% end %>
+          <h6><strong><%= review.description %></strong></h6>
         <div>
-      <% end %>    
+        <hr>
+      <% end %>
   <% end %>
   </div>
   </div>
