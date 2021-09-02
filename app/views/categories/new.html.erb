@@ -2,10 +2,12 @@
   <div class="row justify-content-center">
     <div class="col-6">
       <h2>Crear nueva categor&iacute;a</h2>
-      <%= simple_form_for @category do |f| %>
-      <%= f.input :name %>
-      <%= f.input :photo, as: :file %>
-      <%= f.submit "Crear nueva categoría", class: 'btn btn-warning rounded-pill' %>
+      <% if policy(Category).create? %>
+        <%= simple_form_for @category do |f| %>
+        <%= f.input :name %>
+        <%= f.input :photo, as: :file %>
+        <%= f.submit "Crear nueva categoría", class: 'btn btn-warning rounded-pill' %>
+        <% end %>
       <% end %>
     </div>
   </div>

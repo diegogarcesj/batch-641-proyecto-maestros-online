@@ -6,21 +6,21 @@ class MastersController < ApplicationController
     if params[:query] && params[:query] != "" && params[:ubication] && params[:ubication] != ""
       @category = Category.find_by("name ILIKE ?", "%" + params[:query] + "%")
       if @category
-        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").or(Master.where(category_id: @category.id)).near(params[:ubication], 10)
+        @masters = policy_scope(Master).where("description ILIKE ?", "%#{params[:query]}%").or(policy_scope(Master).where(category_id: @category.id)).near(params[:ubication], 10)
       else
-        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").near(params[:ubication], 10)
+        @masters = policy_scope(Master).where("description ILIKE ?", "%#{params[:query]}%").near(params[:ubication], 10)
       end
     elsif params[:query] && params[:query] != ""
       @category = Category.find_by("name ILIKE ?", "%" + params[:query] + "%")
       if @category
-        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%").or(Master.where(category_id: @category.id))
+        @masters = policy_scope(Master).where("description ILIKE ?", "%#{params[:query]}%").or(policy_scope(Master).where(category_id: @category.id))
       else
-        @masters = Master.where("description ILIKE ?", "%#{params[:query]}%")
+        @masters = policy_scope(Master).where("description ILIKE ?", "%#{params[:query]}%")
       end
     elsif params[:ubication] && params[:ubication] != ""
-        @masters = Master.near(params[:ubication], 10)
+        @masters = policy_scope(Master).near(params[:ubication], 10)
     else
-        @masters = Master.all
+        @masters = policy_scope(Master).all
     end
   end
 
@@ -30,14 +30,13 @@ class MastersController < ApplicationController
 
   def new
      @master = Master.new
-  end
-
-  def edit
+     authorize @master
   end
 
   def create
      @master = Master.new(master_params)
      @master.user = current_user
+     authorize @master
 
     if @master.save
       redirect_to master_path(@master)
@@ -46,7 +45,9 @@ class MastersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /masters/1
+  def edit
+  end
+
   def update
     if @master.update(master_params)
       redirect_to @master
@@ -55,8 +56,6 @@ class MastersController < ApplicationController
     end
   end
 
-
-  # DELETE /masters/1
   def destroy
     @user = @master.user
     @master.destroy
@@ -68,6 +67,7 @@ class MastersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_master
       @master = Master.find(params[:id])
+      authorize @master
     end
 
     # Only allow a trusted parameter "white list" through.
