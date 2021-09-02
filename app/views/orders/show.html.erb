@@ -34,6 +34,7 @@
     <%= link_to "Cancelar orden", master_order_cancel_path(@master, @order), class: "btn btn-warning rounded-pill col-12 my-1" unless @order.hecho? %>
     <% if @order.aceptado? %>
       <%= link_to "Pagar orden", master_order_pay_path(@master, @order), class: "btn btn-warning rounded-pill col-12 my-1" %>
+      <%= @token %>
     <% elsif @order.pagado? %>
       <%= link_to "Orden terminada", master_order_done_path(@master, @order), class: "btn btn-warning rounded-pill col-12 my-1" %>
     <% end %>

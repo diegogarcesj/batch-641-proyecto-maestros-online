@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
   before_action :set_master, only: [:show, :new, :create, :edit, :update, :cancel, :accept, :reject, :pay, :done]
   before_action :set_order, only: [:show, :destroy, :edit, :update]
-  before_action :set_order_with_params_for_status, only: [:cancel, :accept, :reject, :pay, :done]
+  before_action :set_order_with_params_for_status, only: [:cancel, :accept, :reject, :pay, :verify, :done]
+
+  require 'khipu-api-client'
 
   def index
     @orders = Order.all
@@ -9,6 +11,8 @@ class OrdersController < ApplicationController
 
   def show
     @review = Review.new
+
+    @token = params["notification_token"]
   end
 
   def new
@@ -68,8 +72,36 @@ class OrdersController < ApplicationController
   end
 
   def pay
-    @order.pagado!
-    save_after_action
+    receiver_id = 398264
+    secret_key = 'a53a4379585435ea84baf1b22c15fdfb5d933b6b'
+
+    Khipu.configure do |c|
+      c.secret = secret_key
+      c.receiver_id = receiver_id
+      c.platform = 'demo-maestros-online'
+      c.platform_version = '2.0'
+      c.debugging = true
+    end
+
+    price = @order.hours * @order.master.price_per_hour
+
+    client = Khipu::PaymentsApi.new
+    response = client.payments_post('Orden de trabajo', 'CLP', price, {
+      transaction_id: 'FACT2001',
+      # expires_date: Time.now + (24*60*60),
+      body: @order.description,
+      # picture_url: 'http://mi-ecomerce.com/pictures/foto-producto.jp',
+      return_url: master_order_url(@master, @order),
+      cancel_url: master_order_url(@master, @order),
+      notify_url: master_order_url(@master, @order),
+      notify_api_version: '1.3'
+    })
+
+    payment_id = response.payment_id
+    redirect_to response.payment_url
+
+    #@order.pagado!
+    #save_after_action
   end
 
   def done
