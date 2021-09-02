@@ -17,7 +17,8 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.order = @order
     @review.user = current_user
-    # @review.rating = 1 # Ya no usaremos esto para probar
+    authorize @review
+
     if @review.save
       redirect_to master_order_path(@master, @order)
     else
