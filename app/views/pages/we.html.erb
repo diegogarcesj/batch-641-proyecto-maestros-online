@@ -1,12 +1,32 @@
 <div class="container my-5">
   <h2>Quiénes somos Nosotros</h2>
-  <p class="mb-5">Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+  <p class="text-justify">Somos un grupo de emprendedores que hemos compartido durante cuatro meses el aprendizaje de Ruby on Rails, impartido por Santo Tomás Educación Continua y Le Wagon, en el marco de la iniciativa público-privada Talento Digital para Chile. Esta aplicación web viene a mostrar los frutos de este proceso de aprendizaje, y se presenta como una herramienta útil para trabajadores de diversos oficios y clientes interesados en contratar sus servicios, para solucionar sus problemas cotidianos.</p>
+
+  <h4>El equipo</h4>
+  <div class="row d-flex content-justify-center text-center mb-5">
+      <div class="col-4">
+          <%= image_tag 'diego.jpg', width: 100, height: 100, class: 'rounded-circle' %>
+          <strong>Diego Garc&eacute;s Jim&eacute;nez</strong>
+      </div>
+      <div class="col-4">
+          <%= image_tag 'gina.png', width: 100, height: 100, class: 'rounded-circle' %>
+          <strong>Gina Vargas P&eacute;rez</strong>
+      </div>
+      <div class="col-4">
+          <%= image_tag 'jose.jpg', width: 100, height: 100, class: 'rounded-circle' %>
+          <strong>Jos&eacute; Rivera Monta&ntilde;o</strong>
+      </div>
+  </div>
+
+  <br /><br />
+
+
 
   <div class="d-flex justify-content-center">
           <%= link_to "Iniciar Sesión", new_user_session_path, class: "btn btn-warning rounded-pill text-white mx-3" %>
           <%= link_to "Registrarse", new_user_registration_path, class: "btn btn-warning rounded-pill text-white mx-3" %>
   </div>
 
-  <br /><br /><br /><br />
+  <br /><br />
 
 </div>
