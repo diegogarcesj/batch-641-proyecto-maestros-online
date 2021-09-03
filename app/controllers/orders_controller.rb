@@ -2,7 +2,9 @@ class OrdersController < ApplicationController
   before_action :set_master, only: [:show, :new, :create, :edit, :update, :cancel, :accept, :reject, :pay, :done]
   before_action :set_order, only: [:show, :destroy, :edit, :update]
   before_action :set_order_with_params_for_status, only: [:cancel, :accept, :reject, :pay, :verify, :done]
+
   protect_from_forgery with: :null_session
+  skip_before_action :authenticate_user!, only: [:show]
 
   require 'khipu-api-client'
 
