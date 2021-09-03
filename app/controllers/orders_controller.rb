@@ -12,7 +12,35 @@ class OrdersController < ApplicationController
   def show
     @review = Review.new
 
-    @token = params["notification_token"]
+    if params["notification_token"]
+
+      receiver_id = 398264
+      secret = 'a53a4379585435ea84baf1b22c15fdfb5d933b6b'
+      api_version = params["api_version"] # Parámetro api_version
+      notification_token = params["notification_token"]  # Parámetro notification_token
+      amount = @order.hours * @order.master.price_per_hour
+
+      if api_version == '1.3'
+        Khipu.configure do |c|
+          c.receiver_id = receiver_id
+          c.secret = secret
+          c.platform = 'demo-maestros-online'
+          c.platform_version = '2.0'
+          # c.debugging = true
+        end
+
+        client = Khipu::PaymentsApi.new
+        response = client.payments_get(notification_token)
+        if response.receiver_id == receiver_id
+          if response.status == 'done' && response.amount == amount
+            # marcar el pago como completo y entregar el bien o servicio
+            @order.pagado!
+            @order.save
+          end
+        end
+      end
+    end
+
   end
 
   def new
