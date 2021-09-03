@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
   get 'help', to: 'pages#help'
   get 'we', to: 'pages#we'
+  post '/masters/:master_id/orders/:id', to: 'orders#show'
 end
