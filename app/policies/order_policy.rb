@@ -6,7 +6,7 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def show?
-    record.user == user || record.master.user == user
+    true
   end
 
   def new?
