@@ -23,14 +23,16 @@
                   <% else %>
                     <small class="text-secondary">Sin valoraciones a&uacute;n</small>
                   <% end %>
-                  <small><p><%= master.description%></p></small>
-                  <small><p>Precio por hora: <span class="text-warning"><strong><%= master.price_per_hour%></strong></span></p></small>
               </div>
               <div >
                 <%= cl_image_tag master.user.photo.key, width: 50, height: 50, crop: :fill, class: 'avatar-bordered avatar-custom' %>
               </div>
             </div>
           </div>
+          <div class="overflow-auto px-3" style="height: 100px;">
+            <small><p><%= master.description%></p></small>
+          </div>
+          <small class="px-3"><p>Precio por hora: <span class="text-warning"><strong><%= master.price_per_hour%></strong></span></p></small>
           <%= cl_image_tag master.photos[0].key, crop: :fill, class: 'rounded img-fluid img-responsive'%>
         </div>
         <% end %>
